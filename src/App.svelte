@@ -63,6 +63,8 @@
 </script>
 
 <main>
+  <h1>kurari-overlay</h1>
+  <p>くらりちゃんを写真に重ねることが出来ます</p>
   <div>
     <label for="image">Upload a picture:</label>
     <input type="file" id="image" accept="image/png, image/jpeg" bind:files />
