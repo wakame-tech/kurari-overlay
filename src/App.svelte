@@ -8,6 +8,7 @@
 
   let image: HTMLImageElement | null = null;
   let overlay: HTMLImageElement | null = null;
+  let resultDataUrl: string | null = null;
 
   const readAsDataURL = (blob: Blob) =>
     new Promise((resolve) => {
@@ -33,15 +34,12 @@
     const ctx = canvas.getContext("2d")!;
     ctx.drawImage(image, 0, 0);
 
-    const actualRatio = overlay.height / image.height;
-    const scale = actualRatio / ratio;
-    console.log(
-      `ratio: ${actualRatio}, expectedRatio: ${ratio}, scale: ${scale}`,
-    );
+    const scale = overlay.height / image.height / ratio;
     const [width, height] = [overlay.width / scale, overlay.height / scale];
     const top = image.height - height;
     const left = overlay.src.includes("left") ? 0 : image.width - width;
     ctx.drawImage(overlay, left, top, width, height);
+    resultDataUrl = canvas.toDataURL();
   };
 
   const handleScaleChange = (event: Event) => {
@@ -90,7 +88,17 @@
   </div>
 
   <canvas id="canvas"></canvas>
+  {#if resultDataUrl}
+    <img class="preview" src={resultDataUrl} alt="result" />
+  {/if}
 </main>
 
 <style>
+  #canvas {
+    display: none;
+  }
+
+  .preview {
+    max-width: 100%;
+  }
 </style>
