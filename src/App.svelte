@@ -63,7 +63,7 @@
 </script>
 
 <main>
-  <h1>kurari-overlay</h1>
+  <h2>kurari-overlay</h2>
   <p>くらりちゃんを写真に重ねることが出来ます</p>
   <div>
     <label for="image">Upload a picture:</label>
